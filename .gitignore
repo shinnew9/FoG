@@ -13,22 +13,33 @@
 *.meta
 *.csproj
 
+
 # OS
 .DS_Store
 Thumbs.db
 
+
 # Keep only essential folders
+!FoG_Revised/Assets/**/*.meta
 !FoG_Revised/Assets/Scripts/
 !FoG_Revised/Assets/Scenes/
 !FoG_Revised/ProjectSettings/
+!FoG_Revised/ProjectSettings/**/*.meta
 !FoG_Revised/docs/
 !FoG_Revised/README.md
 
+!FoG_Walkways/Assets/**/*.meta
 !FoG_Walkways/Assets/Scripts/
 !FoG_Walkways/Assets/Scenes/
 !FoG_Walkways/ProjectSettings/
+!FoG_Walkways/ProjectSettings/**/*.meta
 !FoG_Walkways/docs/
+
+
+
+
 !FoG_Walkways/README.md
+
 
 !docs/
 !*.md
