@@ -7,7 +7,7 @@
 **/.vs/
 **/Logs/
 **/UserSettings/
-**/Packages/
+
 **/.vscode/
 **/.idea/
 *.meta
