@@ -1,241 +1,241 @@
-# FoG (Freeze of Gait) 프로젝트 시나리오 작동 문서
+# FoG (Freeze of Gait) Project Scenarios Documentation
 
-## 📋 개요
+## 📋 Overview
 
-본 문서는 FoG_Revised 및 FoG_Walkways 프로젝트의 총 6개 시나리오의 작동 방식과 구조를 설명합니다.
-
----
-
-## 🎮 FoG_Revised 시나리오 (6개)
-
-### 1. **ScenarioMenu.unity** - 메뉴 시나리오
-**위치**: `Assets/Scenes/ScenarioMenu.unity`
-
-**목적**: VR 애플리케이션의 진입점으로, 다른 시나리오를 선택할 수 있는 메뉴 역할
-
-**구조**:
-- 메뉴 UI 패널 (하나 또는 여러 개의 버튼)
-- 각 버튼은 해당 시나리오 씬으로 연결
-
-**작동 방식**:
-```
-[ScenarioMenu] → 사용자가 버튼 선택 → 해당 시나리오 로드
-```
-
-**주요 컴포넌트**:
-- Canvas (UI 렌더링)
-- 시나리오 선택 버튼들
+This document describes the operation methods and structure of 6 total scenarios in the FoG_Revised and FoG_Walkways projects.
 
 ---
 
-### 2. **BasicScene.unity** - 기본 시나리오
-**위치**: `Assets/Scenes/BasicScene.unity`
+## 🎮 FoG_Revised Scenarios (6 Total)
 
-**목적**: VR 환경의 기본 설정을 테스트하는 간단한 시나리오
+### 1. **ScenarioMenu.unity** - Menu Scenario
+**Location**: `Assets/Scenes/ScenarioMenu.unity`
 
-**구조**:
-- Brick Project Studio 아파트 키트 기본 환경
-- First Person Controller (플레이어 시점)
-- 기본 조명 및 환경 설정
+**Purpose**: Entry point for the VR application, serving as the menu to select different scenarios
 
-**작동 방식**:
+**Structure**:
+- Menu UI panel (one or more buttons)
+- Each button connects to the corresponding scenario scene
+
+**How It Works**:
 ```
-시작 → 플레이어 스폰 → 자유로운 이동 및 탐색
+[ScenarioMenu] → User selects button → Corresponding scenario loads
 ```
 
-**주요 기능**:
-- Mouse/VR 컨트롤러를 이용한 1인칭 이동
-- 환경 탐색 및 상호작용
-
-**메뉴 복귀**:
-- VR 컨트롤러 Y 버튼 (왼쪽) 클릭 → ScenarioMenu로 복귀 (ReturnToMenu.cs)
+**Key Components**:
+- Canvas (UI rendering)
+- Scenario selection buttons
 
 ---
 
-### 3. **Freeze_of_Gait.unity** - 보행동결 주요 시나리오
-**위치**: `Assets/Scenes/Freeze_of_Gait.unity`
+### 2. **BasicScene.unity** - Basic Scenario
+**Location**: `Assets/Scenes/BasicScene.unity`
 
-**목적**: 보행동결(Freeze of Gait) 증상을 시뮬레이션하고 재활 훈련을 수행하는 주요 시나리오
+**Purpose**: A simple scenario to test the basic VR environment setup
 
-**구조**:
-- 실제 보행 경로 설정
-- 장애물 및 트리거 포인트
-- 환경 피드백 시스템
-- 플레이어 이동 추적
+**Structure**:
+- Brick Project Studio apartment kit base environment
+- First Person Controller (player perspective)
+- Basic lighting and environmental settings
 
-**작동 방식**:
+**How It Works**:
 ```
-시작 → 플레이어 스폰 위치 설정 → 
-보행 경로 따라가기 → 트리거 감지 → 
-제어 메커니즘 활성화 (음성 신호, 시각적 신호 등) →
-보행 계속 진행
+Start → Player spawns → Free movement and exploration
 ```
 
-**주요 환경**:
-- 실내 아파트 환경
-- 보행 경로 마킹
-- 다양한 난이도의 장애물
+**Key Features**:
+- First-person movement using mouse/VR controller
+- Environment exploration and interaction
 
-**측정 항목**:
-- 보행 속도
-- 이동 시간
-- 중단/정지 횟수
-- 경로 이탈 거리
-
-**메뉴 복귀**:
-- VR 컨트롤러 Y 버튼 클릭
+**Return to Menu**:
+- Click VR controller Y button (left) → Return to ScenarioMenu (ReturnToMenu.cs)
 
 ---
 
-### 4. **Freeze_of_Gait_6m_3m.unity** - 6m/3m 거리 변형
-**위치**: `Assets/Scenes/Freeze_of_Gait_6m_3m.unity`
+### 3. **Freeze_of_Gait.unity** - Main Freeze of Gait Scenario
+**Location**: `Assets/Scenes/Freeze_of_Gait.unity`
 
-**목적**: 더 짧은 거리(3m)와 긴 거리(6m)를 결합하여 다양한 보행 패턴 테스트
+**Purpose**: Primary scenario to simulate Freeze of Gait symptoms and conduct rehabilitation training
 
-**구조**:
-- 두 섹션 보행 경로:
-  - **3m 섹션**: 단거리 보행 테스트
-  - **6m 섹션**: 중거리 보행 테스트
-- 거리 마커 및 시작/끝점 명확히 표시
+**Structure**:
+- Actual walking path setup
+- Obstacles and trigger points
+- Environmental feedback system
+- Player movement tracking
 
-**작동 방식**:
+**How It Works**:
 ```
-3m 섹션 시작 → 3m 거리 보행 → 
-6m 섹션 시작 → 6m 거리 보행 → 완료
+Start → Set player spawn position → 
+Follow walking path → Detect triggers → 
+Activate control mechanism (voice signal, visual signal, etc.) →
+Continue walking
 ```
 
-**차별점**:
-- 기본 Freeze_of_Gait 시나리오보다 거리를 세분화
-- 다양한 보행 거리에서 성능 비교
+**Key Environment**:
+- Indoor apartment setting
+- Marked walking paths
+- Obstacles of varying difficulty
 
-**데이터 수집**:
-- 각 거리별 이동 시간
-- 거리별 동작 특성 비교
+**Measurement Items**:
+- Walking speed
+- Movement time
+- Number of pauses/stops
+- Path deviation distance
+
+**Return to Menu**:
+- Click VR controller Y button
 
 ---
 
-### 5. **Freeze_of_Gait_Doorway.unity** - 출입구 시나리오
-**위치**: `Assets/Scenes/Freeze_of_Gait_Doorway.unity`
+### 4. **Freeze_of_Gait_6m_3m.unity** - 6m/3m Distance Variant
+**Location**: `Assets/Scenes/Freeze_of_Gait_6m_3m.unity`
 
-**목적**: 출입구(doorway)를 통과할 때 발생하는 보행동결 증상을 시뮬레이션
+**Purpose**: Combine shorter (3m) and longer (6m) distances to test diverse walking patterns
 
-**구조**:
-- 출입구 시각적 요소 (문 프레임, 틀)
-- 출입구 통과 감지 트리거
-- 통과 전후 보행 경로
+**Structure**:
+- Two-section walking path:
+  - **3m Section**: Short-distance walking test
+  - **6m Section**: Medium-distance walking test
+- Distance markers and clear start/end points
 
-**작동 방식**:
+**How It Works**:
 ```
-초기 위치 → 출입구로 접근 → 
-[출입구 통과 감지] → 제어 신호 활성화 →
-출입구 통과 → 계속 보행
+3m Section Start → Walk 3 meters → 
+6m Section Start → Walk 6 meters → Complete
 ```
 
-**특수 기능**:
-- 출입구 감지 시 특정 자극(음성, 빛, 진동 등) 제공
-- 출입구 통과 시간 측정
-- 통과 성공/실패 기록
+**Unique Features**:
+- Subdivides distance testing compared to basic Freeze_of_Gait scenario
+- Allows comparison of performance across different walking distances
 
-**임상 의미**:
-- 파킨슨병 환자의 출입구 통과 시 보행동결 증상이 두드러짐
-- 이를 극복하는 훈련에 특화
+**Data Collection**:
+- Movement time per distance
+- Performance characteristics by distance
 
 ---
 
-### 6. **Freeze_of_Gait_Closed_Door.unity** - 닫힌 문 시나리오
-**위치**: `Assets/Scenes/Freeze_of_Gait_Closed_Door.unity`
+### 5. **Freeze_of_Gait_Doorway.unity** - Doorway Scenario
+**Location**: `Assets/Scenes/Freeze_of_Gait_Doorway.unity`
 
-**목적**: 닫힌 문 상황에서의 보행동결 시뮬레이션 및 대처 능력 테스트
+**Purpose**: Simulate Freeze of Gait symptoms that occur when passing through doorways
 
-**구조**:
-- 폐쇄된 출입구 (닫힌 문)
-- 문 개방/폐쇄 트리거 시스템
-- 대기 구간 및 보행 경로
+**Structure**:
+- Doorway visual elements (door frame)
+- Doorway passage detection trigger
+- Walking paths before and after passage
 
-**작동 방식**:
+**How It Works**:
 ```
-시작 → 문 앞에서 대기 또는 접근 →
-[문 열림 신호 또는 자동 개방] →
-문 통과 보행 → 계속 진행
+Initial position → Approach doorway → 
+[Doorway passage detected] → Activate control signal →
+Pass through doorway → Continue walking
 ```
 
-**고급 기능**:
-- 조건부 문 개방 (시간 기반, 신호 기반, 자동)
-- 문 통과 시 제어 신호 제공
-- 문 개방 지연에 따른 보행동결 심각도 측정
+**Special Features**:
+- Provide specific stimuli when doorway is detected (voice, light, vibration, etc.)
+- Measure doorway passage time
+- Record passage success/failure
 
-**임상 응용**:
-- 실제 일상생활의 닫힌 문 상황 재현
-- 응급 상황 대처 능력 평가
+**Clinical Significance**:
+- Freeze of Gait symptoms are more prominent when Parkinson's patients pass through doorways
+- Specialized for training to overcome this challenge
 
 ---
 
-## 🎮 FoG_Walkways 시나리오 (주요 3개)
+### 6. **Freeze_of_Gait_Closed_Door.unity** - Closed Door Scenario
+**Location**: `Assets/Scenes/Freeze_of_Gait_Closed_Door.unity`
 
-### 7. **MainMenu.unity** - 메뉴
-**위치**: `Assets/Scenes/MainMenu.unity`
+**Purpose**: Simulate Freeze of Gait in closed door situations and test coping ability
 
-**목적**: 보행 시뮬레이션 애플리케이션의 메뉴
+**Structure**:
+- Closed passage (closed door)
+- Door open/close trigger system
+- Waiting area and walking path
 
-**구조**:
-- 메인 메뉴 UI
-- 보행 시나리오 선택 버튼
+**How It Works**:
+```
+Start → Wait or approach door →
+[Door opens signal or auto-opens] →
+Walk through door → Continue
+```
+
+**Advanced Features**:
+- Conditional door opening (time-based, signal-based, automatic)
+- Provide control signal when passing through door
+- Measure Freeze of Gait severity based on door opening delay
+
+**Clinical Application**:
+- Recreate real-life scenarios with closed doors
+- Assess emergency situation response ability
 
 ---
 
-### 8. **ClutteredWalkway.unity** - 복잡한 보도
-**위치**: `Assets/Scenes/ClutteredWalkway.unity`
+## 🎮 FoG_Walkways Scenarios (3 Main)
 
-**목적**: 장애물이 많은 복잡한 환경에서의 보행 능력 평가
+### 7. **MainMenu.unity** - Menu
+**Location**: `Assets/Scenes/MainMenu.unity`
 
-**구조**:
-- 여러 장애물 배치
-- 보행 경로 설정
-- 복잡도가 높은 환경
+**Purpose**: Menu for the walking simulation application
 
-**작동 방식**:
-```
-시작 → 장애물 피해 보행 → 경로 완성
-```
-
-**특징**:
-- 실제 일상 보행 환경 재현
-- 장애물 회피 능력 측정
+**Structure**:
+- Main menu UI
+- Walking scenario selection buttons
 
 ---
 
-### 9. **NarrowedWalkway.unity** - 좁은 보도
-**위치**: `Assets/Scenes/NarrowedWalkway.unity`
+### 8. **ClutteredWalkway.unity** - Complex Walkway
+**Location**: `Assets/Scenes/ClutteredWalkway.unity`
 
-**목적**: 좁은 공간에서의 보행 안정성 및 보행동결 증상 평가
+**Purpose**: Assess walking ability in complex environments with many obstacles
 
-**구조**:
-- 폭이 좁은 보행 경로
-- 공간 제약 시뮬레이션
-- 보행 안정성 추적
+**Structure**:
+- Multiple obstacles placed
+- Walking path setup
+- High-complexity environment
 
-**작동 방식**:
+**How It Works**:
 ```
-시작 → 좁은 보도 진입 → 균형 유지하며 보행 → 경로 완성
+Start → Avoid obstacles while walking → Complete path
 ```
 
-**특징**:
-- 공간적 제약에서의 보행 패턴 분석
-- 불안정성 및 동결 증상 발현 평가
+**Features**:
+- Recreate actual daily walking environment
+- Measure obstacle avoidance ability
 
 ---
 
-## 🔧 공통 시스템
+### 9. **NarrowedWalkway.unity** - Narrow Walkway
+**Location**: `Assets/Scenes/NarrowedWalkway.unity`
 
-### 메뉴 복귀 메커니즘
-**스크립트**: `Assets/Scripts/ReturnToMenu.cs`
+**Purpose**: Assess walking stability and Freeze of Gait symptoms in narrow spaces
+
+**Structure**:
+- Narrow walking path
+- Space constraint simulation
+- Walking stability tracking
+
+**How It Works**:
+```
+Start → Enter narrow walkway → Maintain balance while walking → Complete path
+```
+
+**Features**:
+- Analyze walking patterns under spatial constraints
+- Assess instability and Freeze of Gait symptom manifestation
+
+---
+
+## 🔧 Common Systems
+
+### Menu Return Mechanism
+**Script**: `Assets/Scripts/ReturnToMenu.cs`
 
 ```csharp
 public class ReturnToMenu : MonoBehaviour
 {
     void Update()
     {
-        // VR 컨트롤러 Y 버튼 (왼쪽 컨트롤러)
+        // VR controller Y button (left controller)
         if (OVRInput.GetDown(OVRInput.Button.Four))
         {
             Debug.Log("[Scene] Returning to menu...");
@@ -245,14 +245,14 @@ public class ReturnToMenu : MonoBehaviour
 }
 ```
 
-**작동 방식**:
-- 모든 시나리오 씬에 `ReturnToMenu` 스크립트가 포함됨
-- VR 컨트롤러의 Y 버튼을 누르면 ScenarioMenu로 복귀
-- 현재 시나리오 상태 저장 여부는 애플리케이션 설정에 따름
+**How It Works**:
+- ReturnToMenu script is included in all scenario scenes
+- Pressing the Y button on VR controller returns to ScenarioMenu
+- Current scenario state saving depends on application settings
 
 ---
 
-## 📊 시나리오 흐름도
+## 📊 Scenario Flow Diagram
 
 ```
 ┌─────────────────┐
@@ -269,8 +269,8 @@ public class ReturnToMenu : MonoBehaviour
       └────────────────────┴───────────────────┴──────────────┴───────────────┘
                                    ↓
                         ┌─────────────────────┐
-                        │   Y 버튼 누름       │
-                        │  (메뉴 복귀)       │
+                        │   Press Y button    │
+                        │  (Return to menu)   │
                         └──────────┬──────────┘
                                    ↓
                         ┌─────────────────────┐
@@ -280,9 +280,9 @@ public class ReturnToMenu : MonoBehaviour
 
 ---
 
-## ⚙️ 기술 스택
+## ⚙️ Technology Stack
 
-- **Game Engine**: Unity (VR 지원)
+- **Game Engine**: Unity (VR support)
 - **VR Platform**: Meta Quest (OVR Input)
 - **Asset Pack**: Brick Project Studio Apartment Kit
 - **Scripting**: C#
@@ -290,49 +290,49 @@ public class ReturnToMenu : MonoBehaviour
 
 ---
 
-## 📝 시나리오 선택 가이드
+## 📝 Scenario Selection Guide
 
-| 목표 | 추천 시나리오 | 이유 |
+| Goal | Recommended Scenario | Reason |
 |------|-------------|------|
-| 기본 VR 환경 테스트 | BasicScene | 최소 기능으로 시스템 확인 |
-| 보행동결 평가 | Freeze_of_Gait | 완전한 보행 경로 및 측정 |
-| 거리별 성능 비교 | Freeze_of_Gait_6m_3m | 다양한 거리에서 평가 |
-| 출입구 통과 능력 | Freeze_of_Gait_Doorway | 실제 상황 재현 |
-| 응급 상황 | Freeze_of_Gait_Closed_Door | 문이 닫혀있는 상황 대처 |
-| 복잡한 환경 | ClutteredWalkway | 장애물 회피 능력 평가 |
-| 좁은 공간 | NarrowedWalkway | 공간 제약 상황 평가 |
+| Basic VR environment test | BasicScene | Verify system with minimal features |
+| Freeze of Gait assessment | Freeze_of_Gait | Complete walking path and measurements |
+| Distance-dependent performance comparison | Freeze_of_Gait_6m_3m | Evaluate at various distances |
+| Doorway passage ability | Freeze_of_Gait_Doorway | Recreate real-world situation |
+| Emergency situation | Freeze_of_Gait_Closed_Door | Assess response to closed door situation |
+| Complex environment | ClutteredWalkway | Evaluate obstacle avoidance ability |
+| Narrow space | NarrowedWalkway | Assess space constraint response |
 
 ---
 
-## 🚀 시작하기
+## 🚀 Getting Started
 
-1. **Unity 프로젝트 열기**
+1. **Open Unity Project**
    ```
    C:\Users\user\workspaces\unity\FoG_Revised
    ```
 
-2. **ScenarioMenu 시나리오 로드**
-   - Project 윈도우에서 `Assets/Scenes/ScenarioMenu.unity` 열기
-   - Play 버튼 클릭
+2. **Load ScenarioMenu**
+   - Open `Assets/Scenes/ScenarioMenu.unity` in Project window
+   - Click Play button
 
-3. **시나리오 선택 및 테스트**
-   - 원하는 시나리오 버튼 클릭
-   - 시나리오 실행
+3. **Select and Test Scenario**
+   - Click desired scenario button
+   - Run scenario
 
-4. **메뉴로 복귀**
-   - VR 컨트롤러 Y 버튼 (또는 테스트 시 ESC 키) 눌림
-   - ScenarioMenu로 자동 전환
-
----
-
-## 📌 주의사항
-
-- **메뉴 복귀**: 모든 시나리오에서 Y 버튼으로 메뉴로 복귀 가능
-- **VR 헤드셋**: Meta Quest 장치 연결 필요 (또는 에뮬레이션)
-- **데이터 저장**: 각 시나리오 완료 후 데이터 자동 저장 여부 확인
-- **성능 최적화**: 복잡한 시나리오는 고성능 PC 권장
+4. **Return to Menu**
+   - Press VR controller Y button (or ESC key during testing)
+   - Automatically switch to ScenarioMenu
 
 ---
 
-**작성일**: 2026-07-22  
-**마지막 업데이트**: 2026-07-22
+## 📌 Important Notes
+
+- **Menu Return**: Y button available in all scenarios to return to menu
+- **VR Headset**: Meta Quest device connection required (or emulation)
+- **Data Saving**: Verify automatic data saving after each scenario completion
+- **Performance**: Complex scenarios require high-performance PC
+
+---
+
+**Created**: 2026-07-22  
+**Last Updated**: 2026-07-22
