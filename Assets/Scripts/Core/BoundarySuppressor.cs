@@ -1,14 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Suppresses the Quest Guardian boundary while this app runs, so FoG
-/// participants can walk the full 9.25m without grey passthrough fade
-/// or "Create boundary" popups. Replaces the adb
+/// Suppresses the Quest Guardian boundary while this app runs, so FoG participants can walk the full 9.25m without grey passthrough fade or "Create boundary" popups. Replaces the adb
 /// `setprop debug.oculus.guardian_pause 1` workaround — no PC needed.
 ///
-/// The OS only grants boundary suppression while a passthrough layer is
-/// actively running (safety rule), so this also spins up an invisible
-/// passthrough underlay — the opaque VR scene fully covers it.
+/// The OS only grants boundary suppression while a passthrough layer is actively running (safety rule), so this also spins up an invisible passthrough underlay — the opaque VR scene fully covers it.
 ///
 /// Requires (one-time, project-wide, in OVRManager inspector > Quest Features):
 ///   - Passthrough Support: Supported
@@ -16,6 +12,7 @@ using UnityEngine;
 /// Attach this to one GameObject in every scene (MainMenu, ClutteredWalkway,
 /// NarrowedWalkway).
 /// </summary>
+/// 
 public class BoundarySuppressor : MonoBehaviour
 {
     void Start()
@@ -38,8 +35,8 @@ public class BoundarySuppressor : MonoBehaviour
         }
         layer.overlayType = OVROverlay.OverlayType.Underlay;
         layer.compositionDepth = 0;
-        layer.hidden = false;
-        layer.enabled = true;
+        layer.hidden = true;
+        // layer.enabled = false;
 
         // OVRManager re-sends this request every frame until the OS accepts.
         manager.shouldBoundaryVisibilityBeSuppressed = true;

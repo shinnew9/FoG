@@ -1,4 +1,5 @@
 using UnityEngine;
+using XRMultiplayer;
 
 public class StartCalibration : MonoBehaviour
 {
@@ -139,6 +140,9 @@ public class StartCalibration : MonoBehaviour
 
         Vector3 translation = realStartPoint - rotatedVirtualStart;
         worldRoot.position += translation;
+
+        // Record calibration data
+        SessionDataManager.Instance.RecordCalibration(new Vector3(0, signedAngle, 0), translation);
 
         if (debugLogs)
         {
