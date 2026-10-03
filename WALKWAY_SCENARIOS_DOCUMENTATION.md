@@ -1,215 +1,215 @@
-# FoG_Walkways 프로젝트 시나리오 작동 문서
+# FoG_Walkways Scenario Documentation
 
-## 📋 개요
+## 📋 Overview
 
-본 문서는 FoG_Walkways 프로젝트의 보행 시뮬레이션 시나리오들의 작동 방식과 구조를 설명합니다.
+This document describes how the walking simulation scenarios in the FoG_Walkways project work and how they are structured.
 
-이 프로젝트는 다양한 보행 환경에서 사용자의 이동 능력과 적응성을 평가하는 데 중점을 두고 있습니다.
-
----
-
-## 🎮 시나리오 목록 (3개)
-
-### 1. **MainMenu.unity** - 메인 메뉴
-**위치**: `Assets/Scenes/MainMenu.unity`  
-**파일 크기**: 67.3 KB
-
-**목적**: FoG_Walkways 애플리케이션의 진입점으로, 보행 시나리오를 선택할 수 있는 메뉴 제공
-
-**구조**:
-- Canvas (UI 렌더링)
-- 버튼 레이아웃 (ClutteredWalkway, NarrowedWalkway 선택)
-- 배경 및 타이틀 (선택사항)
-
-**작동 방식**:
-```
-[애플리케이션 시작] 
-         ↓
-  [MainMenu 로드]
-         ↓
-[사용자가 시나리오 선택]
-         ↓
-[선택된 시나리오 로드]
-```
-
-**UI 컴포넌트**:
-- 시나리오 선택 버튼들
-- 메뉴 배경
-- 텍스트 레이블 (시나리오 이름/설명)
+The project focuses on assessing a user's mobility and adaptability across a range of walking environments.
 
 ---
 
-### 2. **ClutteredWalkway.unity** - 복잡한 보도 시나리오
-**위치**: `Assets/Scenes/ClutteredWalkway.unity`  
-**파일 크기**: 301.8 KB  
-**마지막 수정**: 2026-07-20
+## 🎮 Scenario List (3)
 
-**목적**: 장애물이 많은 실제 보행 환경을 시뮬레이션하여 사용자의 주의력, 회피 능력, 안정성을 평가
+### 1. **MainMenu.unity** — Main Menu
+**Location**: `Assets/Scenes/MainMenu.unity`  
+**File size**: 67.3 KB
 
-**환경 특징**:
+**Purpose**: The entry point of the FoG_Walkways application; presents a menu for choosing a walking scenario.
+
+**Structure**:
+- Canvas (UI rendering)
+- Button layout (choose ClutteredWalkway or NarrowedWalkway)
+- Background and title (optional)
+
+**How it works**:
+```
+[Application starts]
+         ↓
+  [MainMenu loads]
+         ↓
+[User selects a scenario]
+         ↓
+[Selected scenario loads]
+```
+
+**UI components**:
+- Scenario selection buttons
+- Menu background
+- Text labels (scenario name / description)
+
+---
+
+### 2. **ClutteredWalkway.unity** — Cluttered Walkway Scenario
+**Location**: `Assets/Scenes/ClutteredWalkway.unity`  
+**File size**: 301.8 KB  
+**Last modified**: 2026-07-20
+
+**Purpose**: Simulates a real walking environment crowded with obstacles, to assess the user's attention, avoidance ability, and stability.
+
+**Environment**:
 ```
 ┌─────────────────────────────────────┐
-│      ClutteredWalkway 환경          │
+│      ClutteredWalkway environment   │
 │                                     │
-│  ╱╲ 장애물 1                        │
+│  ╱╲ obstacle 1                      │
 │  ║║                                 │
-│ ╱╲╱╲ 장애물 2-3                     │
+│ ╱╲╱╲ obstacles 2-3                  │
 │ ║║║║                                │
-│ ╱╲╱╲╱╲ ... 더 많은 장애물          │
+│ ╱╲╱╲╱╲ ... more obstacles           │
 │                                     │
-│ [보행 경로] ← 사용자가 이 길 따라 │
-│              장애물을 피해 움직임    │
+│ [walking path] ← the user follows   │
+│              this, avoiding obstacles│
 └─────────────────────────────────────┘
 ```
 
-**구조**:
-- **장애물 배치**: 복수 개의 3D 모델 (원추형, 박스형, 원형 등)
-- **보행 경로**: 명확하게 정의된 시작점과 도착점
-- **환경**: 실내 환경 (아파트 또는 복도)
-- **바닥**: Floor prefab 사용 (Prefab 위치: `Assets/Scenes/Floor.prefab`)
+**Structure**:
+- **Obstacle placement**: several 3D models (cones, boxes, cylinders, and so on)
+- **Walking path**: clearly defined start and end points
+- **Environment**: indoors (apartment or corridor)
+- **Floor**: uses the Floor prefab (at `Assets/Scenes/Floor.prefab`)
 
-**작동 흐름**:
+**Flow**:
 ```
-1. 시나리오 시작 → 플레이어 스폰 위치 설정
-2. 장애물 충돌 감지 → 회피 필요
-3. 보행 진행 → 각 장애물 우회
-4. 이동 경로 기록 → 통계 수집
-5. 목표 지점 도달 → 완료
+1. Scenario starts → player spawn position is set
+2. Obstacle collision detection → avoidance required
+3. Walking proceeds → each obstacle is worked around
+4. Path is recorded → statistics collected
+5. Goal reached → complete
 ```
 
-**평가 항목**:
-| 항목 | 설명 |
+**Measures**:
+| Measure | Description |
 |------|------|
-| **이동 시간** | 시작부터 도착까지의 소요 시간 |
-| **경로 효율성** | 직선 거리 대비 실제 이동 거리의 비율 |
-| **회피 횟수** | 장애물 회피 시도 횟수 |
-| **충돌 감지** | 장애물과의 접촉 여부 (안전성 평가) |
-| **이동 속도** | 평균 보행 속도 |
-| **중단 횟수** | 보행 중 멈춘 횟수 |
+| **Traversal time** | Time taken from start to finish |
+| **Path efficiency** | Ratio of actual distance travelled to straight-line distance |
+| **Avoidance count** | Number of obstacle avoidance attempts |
+| **Collision detection** | Whether obstacles were touched (safety measure) |
+| **Walking speed** | Average walking speed |
+| **Stop count** | Number of stops during the walk |
 
-**난이도 조절**:
-- **저 난이도**: 장애물 간 거리 넓음 (초보자용)
-- **중 난이도**: 표준 장애물 배치 (일반 평가)
-- **고 난이도**: 장애물 밀집 (고급 평가)
+**Difficulty**:
+- **Low**: obstacles spaced far apart (for beginners)
+- **Medium**: standard obstacle placement (general assessment)
+- **High**: densely packed obstacles (advanced assessment)
 
-**임상 응용**:
-- 실제 보행 환경에서의 주의력 분산 평가
-- 노인 낙상 위험도 진단
-- 물리 치료 후 개선 정도 평가
+**Clinical applications**:
+- Assessing divided attention in a realistic walking environment
+- Screening fall risk in older adults
+- Measuring improvement after physical therapy
 
 ---
 
-### 3. **NarrowedWalkway.unity** - 좁은 보도 시나리오
-**위置置**: `Assets/Scenes/NarrowedWalkway.unity`  
-**파일 크기**: 521.6 KB  
-**마지막 수정**: 2026-07-19
+### 3. **NarrowedWalkway.unity** — Narrow Walkway Scenario
+**Location**: `Assets/Scenes/NarrowedWalkway.unity`  
+**File size**: 521.6 KB  
+**Last modified**: 2026-07-19
 
-**목적**: 공간적 제약이 있는 환경에서 사용자의 균형감각, 신체 조절 능력, 보행 안정성 평가
+**Purpose**: Assesses balance, body control, and gait stability in a spatially constrained environment.
 
-**환경 특징**:
+**Environment**:
 ```
-좁은 보도 구조:
+Narrow walkway layout:
 
-상단부:
+Top view:
 ┌────┐
-│ ▓▓ │  <- 좌우 벽
-│ ▓▓ │  <- 공간 제약
+│ ▓▓ │  <- walls on both sides
+│ ▓▓ │  <- space constraint
 │ ▓▓ │
 └────┘
 
-측면도:
+Side view:
 │                │
-│    [사용자]    │  <- 보행 경로 (제한된 공간)
+│     [user]     │  <- walking path (restricted space)
 │                │
 
-너비: 약 0.5m ~ 1.5m
-길이: 약 10m
+Width: roughly 0.5 m - 1.5 m
+Length: roughly 10 m
 ```
 
-**구조**:
-- **보행 경로**: 좁은 복도 형태
-- **경계**: 좌우 벽, 천장, 바닥 (폐쇄된 공간)
-- **조명**: 실내 조명 (불안정한 환경 시뮬레이션 가능)
-- **재질**: 마찰력이 있는 바닥 (미끄러움 방지)
+**Structure**:
+- **Walking path**: a narrow corridor
+- **Boundaries**: walls on both sides, ceiling, floor (an enclosed space)
+- **Lighting**: indoor lighting (can simulate an unsettling environment)
+- **Material**: floor with friction (prevents slipping)
 
-**작동 흐름**:
+**Flow**:
 ```
-1. 시나리오 시작 → 좁은 공간 진입
-2. 신체 균형 유지 → 양쪽 벽 감지
-3. 전진 진행 → 느린 속도로 조절
-4. 보행 안정성 모니터링 → 실시간 피드백
-5. 출구 도달 → 완료
+1. Scenario starts → the user enters the narrow space
+2. Balance is maintained → walls on both sides are sensed
+3. The user moves forward → speed is kept low
+4. Gait stability is monitored → real-time feedback
+5. Exit reached → complete
 ```
 
-**평가 항목**:
-| 항목 | 설명 |
+**Measures**:
+| Measure | Description |
 |------|------|
-| **이동 시간** | 전체 보행 소요 시간 |
-| **균형 유지도** | 좌우 편향 정도 (낮을수록 좋음) |
-| **벽 접촉** | 벽과의 접촉 횟수 (안정성 평가) |
-| **이동 속도** | 좁은 공간에서의 보행 속도 |
-| **보행 정규성** | 보행 패턴의 일관성 |
-| **신체 안정성** | 흔들림/틀어짐 정도 |
-| **심리적 불안감** | 사용자 자기 보고 (설문지 기반) |
+| **Traversal time** | Total time taken to walk through |
+| **Balance** | Degree of left-right deviation (lower is better) |
+| **Wall contacts** | Number of contacts with the walls (stability measure) |
+| **Walking speed** | Walking speed in the confined space |
+| **Gait regularity** | Consistency of the walking pattern |
+| **Postural stability** | Degree of sway and twisting |
+| **Perceived anxiety** | User self-report (questionnaire based) |
 
-**난이도 조절**:
-- **저 난이도**: 너비 1.5m, 밝은 조명
-- **중 난이도**: 너비 1.0m, 표준 조명
-- **고 난이도**: 너비 0.5m, 어두운 조명, 불규칙한 바닥
+**Difficulty**:
+- **Low**: 1.5 m wide, bright lighting
+- **Medium**: 1.0 m wide, standard lighting
+- **High**: 0.5 m wide, dim lighting, uneven floor
 
-**임상 응용**:
-- 파킨슨병 환자의 좁은 공간 보행 능력 평가
-- 전정기관 손상 환자의 균형감각 재활
-- 고령자 낙상 위험도 진단
-- 신경계 질환의 보행 장애 평가
+**Clinical applications**:
+- Assessing walking ability in confined spaces in Parkinson's patients
+- Balance rehabilitation for patients with vestibular impairment
+- Screening fall risk in older adults
+- Assessing gait disorders in neurological conditions
 
 ---
 
-## 🔗 추가 환경 에셋
+## 🔗 Additional Environment Assets
 
 ### Floor.prefab
-**위치**: `Assets/Scenes/Floor.prefab`
+**Location**: `Assets/Scenes/Floor.prefab`
 
-**용도**: ClutteredWalkway와 NarrowedWalkway에서 사용되는 보행 바닥 프리팹
+**Used for**: The walking surface in both ClutteredWalkway and NarrowedWalkway.
 
-**구조**:
-- 기본 바닥 메시 (충돌체 포함)
-- 재질: 일반 실내용 바닥재
-- 크기: 시나리오에 맞게 스케일 조절 가능
+**Structure**:
+- Basic floor mesh (with collider)
+- Material: ordinary indoor flooring
+- Size: scalable to fit the scenario
 
-**속성**:
+**Properties**:
 ```
-- Mesh Filter: 바닥 메시
-- Collider: Box Collider (보행 감지)
-- Material: 마찰력 있는 재질
+- Mesh Filter: floor mesh
+- Collider: Box Collider (walk detection)
+- Material: material with friction
 ```
 
 ---
 
-## 📊 시나리오 비교 분석
+## 📊 Scenario Comparison
 
-| 특성 | ClutteredWalkway | NarrowedWalkway |
+| Property | ClutteredWalkway | NarrowedWalkway |
 |------|------------------|-----------------|
-| **주요 평가 능력** | 주의력, 회피 능력, 안정성 | 균형감각, 신체 조절, 안정성 |
-| **환경 특징** | 복수 장애물, 개방형 공간 | 좁은 공간, 폐쇄형 환경 |
-| **난이도** | 중간 ~ 고(장애물에 따라) | 중간 (공간에 따라) |
-| **임상 용도** | 주의산만, 낙상 위험 평가 | 균형 장애, 공황장애 평가 |
-| **재활 적용** | 운동 기능 회복 | 신경계 안정화 |
-| **평가 시간** | 5~10분 | 5~15분 |
-| **안전성** | 상대적으로 안전 (개방형) | 덜 안전 (폐쇄형, 갇힌 느낌) |
+| **Primary measures** | Attention, avoidance, stability | Balance, body control, stability |
+| **Environment** | Multiple obstacles, open space | Narrow space, enclosed environment |
+| **Difficulty** | Medium to high (depends on obstacles) | Medium (depends on the space) |
+| **Clinical use** | Distraction, fall risk assessment | Balance disorders, anxiety assessment |
+| **Rehabilitation use** | Recovery of motor function | Stabilising the nervous system |
+| **Assessment time** | 5-10 minutes | 5-15 minutes |
+| **Safety** | Relatively safe (open) | Less safe (enclosed, confining) |
 
 ---
 
-## 🎮 사용자 인터페이스 흐름
+## 🎮 User Interface Flow
 
 ```
 ┌──────────────────────┐
-│   애플리케이션 시작   │
+│  Application starts  │
 └──────────┬───────────┘
            │
            ▼
     ┌────────────────┐
-    │ MainMenu 로드  │
+    │ MainMenu loads │
     └────────┬───────┘
              │
         ┌────┴────────────────┐
@@ -218,87 +218,87 @@
  ┌───────────────┐   ┌──────────────────┐
  │ Cluttered     │   │ Narrowed         │
  │ Walkway       │   │ Walkway          │
- │ [선택]        │   │ [선택]           │
+ │ [selected]    │   │ [selected]       │
  └───────┬───────┘   └────────┬─────────┘
          │                    │
          ▼                    ▼
-  [시나리오 실행]      [시나리오 실행]
+  [scenario runs]      [scenario runs]
        │                    │
-       │   [평가 진행]      │
+       │   [assessment]     │
        │                    │
        └────┬─────────────┬─┘
             │             │
             ▼             ▼
-    [결과 수집 및 저장]
+    [results collected and saved]
             │
             ▼
-    [MainMenu로 복귀]
-    (또는 앱 종료)
+    [return to MainMenu]
+    (or quit the app)
 ```
 
 ---
 
-## ⚙️ 기술 사양
+## ⚙️ Technical Specifications
 
-### 플랫폼
-- **Game Engine**: Unity (VR 지원)
+### Platform
+- **Game Engine**: Unity (with VR support)
 - **VR Hardware**: Meta Quest (OVR SDK)
 - **Scripting Language**: C#
 - **Asset Store**: Brick Project Studio, Studio Billion, Free Assets
 
-### 성능 요구사항
-- **프레임율**: 90 FPS (VR 표준)
-- **해상도**: 최소 1440×1440 (Quest 기준)
-- **메모리**: 3~4 GB (고급 그래픽)
+### Performance requirements
+- **Frame rate**: 90 FPS (VR standard)
+- **Resolution**: at least 1440×1440 (for Quest)
+- **Memory**: 3-4 GB (high graphics settings)
 
-### 데이터 수집
-- **실시간 추적**: 위치, 속도, 방향, 회전
-- **이벤트 기록**: 충돌, 멈춤, 경로 이탈
-- **결과 저장**: JSON 또는 CSV 형식
-
----
-
-## 🚀 빠른 시작 가이드
-
-### 1단계: 프로젝트 열기
-```
-경로: C:\Users\user\workspaces\unity\FoG_Walkways
-```
-
-### 2단계: MainMenu 씬 로드
-```
-Unity Editor → Project 탭 → Assets/Scenes → MainMenu.unity 더블클릭
-```
-
-### 3단계: 재생 시작
-```
-Play 버튼 클릭 → MainMenu 화면 표시
-```
-
-### 4단계: 시나리오 선택
-```
-ClutteredWalkway 또는 NarrowedWalkway 버튼 클릭
-```
-
-### 5단계: 보행 시뮬레이션
-```
-VR 컨트롤러 또는 키보드로 이동
-- 전진: W / 아날로그 스틱 위
-- 후진: S / 아날로그 스틱 아래
-- 좌회전: A / 아날로그 스틱 좌
-- 우회전: D / 아날로그 스틱 우
-```
-
-### 6단계: 결과 확인
-```
-시나리오 완료 → 결과 화면 또는 자동 저장
-```
+### Data collection
+- **Real-time tracking**: position, speed, direction, rotation
+- **Event logging**: collisions, stops, path deviations
+- **Result storage**: JSON or CSV format
 
 ---
 
-## 📝 데이터 기록 형식
+## 🚀 Quick Start Guide
 
-### 기본 기록 항목
+### Step 1: Open the project
+```
+Path: the FoG_Walkways project directory on your machine
+```
+
+### Step 2: Load the MainMenu scene
+```
+Unity Editor → Project tab → Assets/Scenes → double-click MainMenu.unity
+```
+
+### Step 3: Enter Play mode
+```
+Click the Play button → the MainMenu screen appears
+```
+
+### Step 4: Select a scenario
+```
+Click the ClutteredWalkway or NarrowedWalkway button
+```
+
+### Step 5: Walk through the simulation
+```
+Move with the VR controller or the keyboard
+- Forward:   W / analog stick up
+- Backward:  S / analog stick down
+- Turn left: A / analog stick left
+- Turn right:D / analog stick right
+```
+
+### Step 6: Check the results
+```
+Scenario finishes → results screen, or saved automatically
+```
+
+---
+
+## 📝 Data Record Format
+
+### Basic record fields
 ```json
 {
   "scenario_name": "ClutteredWalkway",
@@ -328,42 +328,41 @@ VR 컨트롤러 또는 키보드로 이동
 
 ---
 
-## ⚠️ 주의사항
+## ⚠️ Cautions
 
-### VR 안전 규칙
-1. **보호 공간 확보**: 최소 2m × 2m 공간 필요
-2. **장애물 제거**: 실제 환경의 물리적 장애물 치우기
-3. **신발 착용**: 안전하고 편한 신발 권장
-4. **충분한 조명**: 어두운 환경에서 테스트하지 말 것
-5. **감시자 배치**: 고령자나 환자는 감시자 동반
+### VR safety rules
+1. **Clear a play space**: at least 2 m × 2 m is needed
+2. **Remove obstacles**: clear physical obstacles out of the real environment
+3. **Wear shoes**: safe, comfortable shoes are recommended
+4. **Light the room well**: do not test in a dark environment
+5. **Have a spotter**: older adults and patients should be accompanied
 
-### 기술적 주의사항
-1. **데이터 백업**: 평가 데이터는 정기적으로 백업
-2. **VR 헤드셋 칼리브레이션**: 매 세션 시작 전 확인
-3. **배터리 확인**: VR 컨트롤러 배터리 상태 점검
-4. **네트워크**: 멀티플레이 기능 사용 시 안정적인 네트워크 필요
-5. **데이터 보안**: 환자 데이터는 보안 서버에 저장
+### Technical cautions
+1. **Back up data**: assessment data should be backed up regularly
+2. **Headset calibration**: check before every session
+3. **Check batteries**: check the VR controllers' battery level
+4. **Network**: a stable network is needed if multiplayer features are used
+5. **Data security**: patient data must be stored on a secure server
 
 ---
 
-## 📚 관련 프로젝트
+## 📚 Related Projects
 
 ### FoG_Revised
-- **위치**: `C:\Users\user\workspaces\unity\FoG_Revised`
-- **초점**: 보행동결(Freeze of Gait) 특화 시나리오
-- **시나리오 수**: 6개 (BasicScene, Freeze_of_Gait variants 등)
+- **Focus**: scenarios specific to freezing of gait
+- **Scenarios**: 6 (BasicScene, Freeze_of_Gait variants, and others)
 
-### 통합 사용
+### Using them together
 ```
-FoG_Revised (주요 평가) + FoG_Walkways (환경 다양성) 
-= 포괄적인 보행능력 평가 시스템
+FoG_Revised (primary assessment) + FoG_Walkways (environmental variety)
+= a comprehensive gait assessment system
 ```
 
 ---
 
-## 📞 지원 및 피드백
+## 📞 Support and Feedback
 
-### 데이터 저장 위치
+### Where data is stored
 ```
 Documents/FoG_Walkways_Results/
 ├── 2026-07-22_ClutteredWalkway_Result.json
@@ -371,13 +370,13 @@ Documents/FoG_Walkways_Results/
 └── ...
 ```
 
-### 문제 해결
-1. **씬 로드 실패**: Assets/Scenes 폴더 확인
-2. **VR 인식 안 됨**: Oculus Runtime 설치 확인
-3. **프레임율 저하**: 그래픽 설정 감소
+### Troubleshooting
+1. **Scene fails to load**: check the Assets/Scenes folder
+2. **VR not detected**: check that the Oculus runtime is installed
+3. **Frame rate drops**: lower the graphics settings
 
 ---
 
-**작성일**: 2026-07-22  
-**마지막 업데이트**: 2026-07-22  
-**프로젝트 버전**: 1.0
+**Written**: 2026-07-22  
+**Last updated**: 2026-07-22  
+**Project version**: 1.0

@@ -38,7 +38,7 @@ namespace XRMultiplayer
         private Vector3 lastPlayerPosition = Vector3.zero;
         private Vector3 lastPlayerRotation = Vector3.zero;
         private float lastFrameRecordTime = 0f;
-        private const float RECORD_INTERVAL = 0.1f; // 0.1초 단위
+        private const float RECORD_INTERVAL = 0.1f; // 10 Hz
         private StreamWriter debugLogWriter;
         private string debugLogPath;
 
